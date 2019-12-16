@@ -1,19 +1,22 @@
 import React from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody,
-    CardTitle } from 'reactstrap';
+    CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+    import { Link } from 'react-router-dom'
 
     // instead of giving these two parameters in the form of objects, We can also use props 
     // just like props used in the second function
     // for user defined components, we use capital letter for writing name of function
     function RenderMenueItem({dish, onClick}) {
         return (
-            <Card 
-            onClick={() =>onClick(dish.id)}>
-            <CardImg width="100%" src={dish.image} alt={dish.name} />
-            <CardImgOverlay>
-                <CardTitle>{dish.name}</CardTitle>
-            </CardImgOverlay>
-        </Card>
+            <Card>
+                <Link to ={`/menu/${dish.id}`}>
+
+                    <CardImg width="100%" src={dish.image} alt={dish.name} />
+                    <CardImgOverlay>
+                        <CardTitle>{dish.name}</CardTitle>
+                    </CardImgOverlay>
+                </Link>
+            </Card>
 
         )
     }
@@ -29,6 +32,16 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
         
             return (
                 <div className="container">
+                    <div className="row">
+                        <Breadcrumb>
+                            <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>Menu</BreadcrumbItem>
+                        </Breadcrumb>
+                        <div className="col-12">
+                            <h3>Menu</h3>
+                            <hr />
+                        </div>                
+                    </div>
                     <div className="row">
                         {menu}
                     </div>
