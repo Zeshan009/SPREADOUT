@@ -3,6 +3,7 @@ import { Card, CardImg, CardBody, CardText, CardTitle, Breadcrumb, BreadcrumbIte
 import { Link } from 'react-router-dom';
 import {Control, LocalForm, Errors} from 'react-redux-form'
 import { Loading } from "./LoadingComponent";
+import {baseUrl} from '../shared/baseUrl'
 
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
@@ -39,7 +40,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
         return (
             <div className="col-12 col-md-5 m-1">
                 <Card>
-                    <CardImg width="100%" src={dish.image} alt={dish.name} />
+                    <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
                     <CardBody>
                         <CardTitle>{dish.name}</CardTitle>
                         <CardText>{dish.description}</CardText>
@@ -180,40 +181,6 @@ class CommentForm extends Component{
                 <div></div>
             )
         }
-        const dish = props.dish
-        const comments = props.comments
-        const dishId = props.dishId
-        const addComment = props.addComment
-        if (dish == null) {
-            return (<div></div>)
-        }
-        const dishItem =RenderDish(dish)
-        const commentItem =RenderComments(comments, dishId, addComment)
-        return (
-            <div className = "container">
-                <div className="row">
-                    <Breadcrumb>
-                    <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                    <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
-                    </Breadcrumb>
-                    <div className="col-12">
-                        <h3>{props.dish.name}</h3>
-                        <hr />
-                    </div>                
-                </div>
-                <div className='row'>
-                    <div className = "col-12 col-md-5 m-1 ">
-                        {dishItem}
-                    </div>
-                    <div className = "col-12 col-md-5 m-1 ">
-                        {commentItem}
-                    </div>
-
-                        
-                </div>  
-            </div>
-            
-        )
     }
 
 export default Dishdetail;
